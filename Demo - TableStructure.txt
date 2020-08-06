@@ -70,10 +70,61 @@ create table t1(
 )
 
 
-
 //索引//
 create index idx_tel on //table// (//attribute//)
 
+
+//規則控制//
+//檢查data欄位是否大於０
+create table t1(
+  id int primary key,
+  data int 
+);
+
+alter table t1 add constraint chk_data check (data>=0);
+
+insert into t1 (id ,data) value (1,100) ,(2,-1);
+
+
+//fk foreign key外鍵設定//
+drop table customer;
+
+create table customer(
+  customerId int primary key,
+  companyName varchar(30)
+);
+
+drop table orders;
+create table orders(
+  orderId int primary key,
+  customerId int
+);
+
+alter table orders 
+  add constraint fk_customer_orders foreign key (customerId) references customer (customerId)
+  on update cascade
+  on delete cascade;
+
+
+insert into customer value (1,'AAA'),(2,'BBB'),(3,'CCC');
+insert into orders value(1,1),(2,1),(3,2);
+
+select * from customer;
+select * from orders;
+
+update orders set customerID='4' where orderId='3';
+update orders set customerID='1' where orderId='3';
+delete from customer  where customerId='1';
+
+//unique 值不重複//
+
+alter table customer add constraint uc unique(companyName);
+insert into customer value(4,'AAA');
+alter table customer drop constraint uc; (mamp不適用)
+
+create unique index idx_company on customer (companyName);
+insert into customer values(4,'AAA');
+drop index idx_comapny on customer;
 
 
 
