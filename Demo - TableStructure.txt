@@ -127,4 +127,51 @@ insert into customer values(4,'AAA');
 drop index idx_comapny on customer;
 
 
+//熱編碼 one-hot//
+１０１１
+有無有有
+
+／／唯讀／／
+lock table products read ;
+
+unlock table;
+
+//連讀都不能讀//
+lock table products write;
+
+unlock table;
+
+
+
+作！！！！！！！！！！！！！業
+建立訂便當資料庫的程式碼
+
+菜單 店家 訂單 訂單明細
+使用者：廠商／下定者
+作！！！！！！！！！！！！！業
+
+備份
+
+mysqldump -uroot -p --databases *databasesname* > ＊路徑+檔案名稱＊
+
+
+匯出文本
+
+select  *
+  into outfile 'c:\\temp\\lab.txt' 
+  fields terminated by ',' optionally enclosed by '"'
+  lines terminated by '\r\n'
+
+  from tablename;
+
+
+load data infile 'c:\\temp\\lab.txt'
+  replace
+  into table categories
+  fields terminated by ',' optionally enclosed by '"'
+  LINES TERMINATED BY '\r\n';
+  -- ignore 2 lines;
+
+select * from categories;
+
 
